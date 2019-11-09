@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>AngularJS Pagination and Table Sort</title>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" />
+        <style>
+            .table-sort th:hover {
+                padding: 7px;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -o-user-select: none;
+                user-select: none;
+                cursor: pointer;
+                visibility:visible;
+                background-color: rgba(141, 192, 219, 0.25);
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div ng-app="tableApp" class="container">
+
+            <div ng-controller="tableCtrl" ng-cloak>
+                <h2>AngularJS Pagination and Table Sort</h2>
+                <hr />
+                <table class="table table-striped table-sort">
+                    <thead>
+                        <tr>
+                            <th ng-click="sort('Id')">
+                                Id&nbsp;<span class="pull-right fas" ng-show="sortKey=='Id'"
+                                    ng-class="{'fa-sort-numeric-up':reverse,'fa-sort-numeric-down':!reverse}"></span>
+                            </th>
+                            <th ng-click="sort('Name')">
+                                Name&nbsp;<span class="pull-right fas" ng-show="sortKey=='Name'"
+                                    ng-class="{'fa-sort-alpha-up':reverse,'fa-sort-alpha-down':!reverse}"></span>
+                            </th>
+                            <th ng-click="sort('Price')">
+                                PriceName&nbsp;<span class="pull-right fas" ng-show="sortKey=='Price'"
+                                    ng-class="{'fa-sort-amount-up':reverse,'fa-sort-amount-down':!reverse}"></span>
+                            </th>
+                            <th ng-click="sort('Info.Quantity')">
+                                Quantity&nbsp;<span class="pull-right fas" ng-show="sortKey=='Info.Quantity'"
+                                    ng-class="{'fa-sort-numeric-up':reverse,'fa-sort-numeric-down':!reverse}"></span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="item in items | orderBy:sortKey:reverse | itemsPerPage: pageSize"
+                            current-page="currentPage">
+                            <td>{{item.Id}}</td>
+                            <td>{{item.Name}}</td>
+                            <td>{{item.Price | currency}}</td>
+                            <td>{{item.Info.Quantity}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <div class="pull-left">
+                    <dir-pagination-controls boundary-links="true">
+                    </dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script src="src/app/app.js"></script>
+        <script src="src/app/module/dirPagination.js"></script>
+        <script src="src/app/controller/tableCtrl.js"></script>
+    </body>
+
+</html>
