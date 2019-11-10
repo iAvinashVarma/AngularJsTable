@@ -35,24 +35,23 @@
                           mdbInput>
                       </form>
                 <hr />
-                <table class="table table-striped table-sort">
+                <table class="table table-stripped table-sort" ng-controller="sortCtrl" ng-init="sortKey ='Id'">
                     <thead>
                         <tr>
                             <th ng-click="sort('Id')">
-                                Id&nbsp;<span class="pull-right fas" ng-show="sortKey=='Id'"
-                                    ng-class="{'fa-sort-numeric-up':reverse,'fa-sort-numeric-down':!reverse}"></span>
+                                Id&nbsp;<span class="pull-right fas" ng-show="sortKey=='Id'" ng-class="sortNumericClass(reverse)"></span>
                             </th>
                             <th ng-click="sort('Name')">
                                 Name&nbsp;<span class="pull-right fas" ng-show="sortKey=='Name'"
-                                    ng-class="{'fa-sort-alpha-up':reverse,'fa-sort-alpha-down':!reverse}"></span>
+                                    ng-class="sortAlphaClass(reverse)"></span>
                             </th>
                             <th ng-click="sort('Price')">
                                 PriceName&nbsp;<span class="pull-right fas" ng-show="sortKey=='Price'"
-                                    ng-class="{'fa-sort-amount-up':reverse,'fa-sort-amount-down':!reverse}"></span>
+                                    ng-class="sortAlphaClass(reverse)"></span>
                             </th>
                             <th ng-click="sort('Info.Quantity')">
                                 Quantity&nbsp;<span class="pull-right fas" ng-show="sortKey=='Info.Quantity'"
-                                    ng-class="{'fa-sort-numeric-up':reverse,'fa-sort-numeric-down':!reverse}"></span>
+                                    ng-class="sortNumericClass(reverse)"></span>
                             </th>
                         </tr>
                     </thead>
@@ -79,6 +78,7 @@
         <script src="src/app/app.js"></script>
         <script src="src/app/module/dirPagination.js"></script>
         <script src="src/app/controller/tableCtrl.js"></script>
+        <script src="src/app/controller/sortCtrl.js"></script>
     </body>
 
 </html>
